@@ -82,6 +82,7 @@ func Refactor(file, output string) {
 
 	if console.AskForConfirmation("Write the code to a file?") {
 		// Write the sanitized code to a file
+		fmt.Println("Writing file:", output)
 		if output != "" {
 			err = os.WriteFile(output, []byte(sanitizedResponse.ImprovedCode), 0644)
 		} else {
@@ -89,7 +90,6 @@ func Refactor(file, output string) {
 			fileParts := strings.Split(file, ".")
 			if len(fileParts) >= 2 && fileParts[0] != "" && fileParts[1] != "" {
 				file = fileParts[0] + "_sanitized." + fileParts[1]
-				fmt.Println("Creating file:", file)
 				err = os.WriteFile(file, []byte(sanitizedResponse.ImprovedCode), 0644)
 			}
 		}

@@ -61,6 +61,7 @@ func writeCodeFiles(codefiles *config.CodeFiles) error {
 			return fmt.Errorf("error creating directory for %s: %w", codefile.Filepath, err)
 		}
 
+		fmt.Println("Writing file:", codefile.Filepath)
 		if err := os.WriteFile(codefile.Filepath, []byte(codefile.Code), 0644); err != nil {
 			return fmt.Errorf("error writing file %s: %w", codefile.Filepath, err)
 		}
@@ -81,46 +82,6 @@ func Scaffold(prompt string) {
 	if console.AskForConfirmation("Do you want to write files?") {
 		if err := writeCodeFiles(codefiles); err != nil {
 			color.Red.Println(err)
-		}
-	}
-}
-
-func Refactor(filePath string, prompt string) {
-	// Read the file content
-	content, err := os.ReadFile(filePath)
-	if err != nil {
-		color.Red.Printf("Error reading file %s: %v\n", filePath, err)
-		return
-	}
-
-	appConfig := config.GetConfig()
-	messages := []config.Message{
-		{Role: "system", Content: appConfig.CodeSystemPrompt},
-		{Role: "user", Content: fmt.Sprintf("Please refactor the following code according to this instruction: %s\n\nCode:\n```\n%s\n```", prompt, string(content))},
-	}
-
-	jdata, err := openai.ChatCompletion(messages, appConfig.Model, 0.1)
-	if err != nil {
-		color.Red.Printf("Error generating refactored code: %v\n", err)
-		return
-	}
-
-	// Extract code from response
-	// This is a simple extraction. You might want to implement more robust parsing
-	// depending on how your OpenAI model is configured to respond.
-	refactoredCode := jdata
-
-	// Display the refactored code
-	color.Yellow.Printf("Original file: %s\n\n", filePath)
-	color.Cyan.Println(refactoredCode + "\n")
-
-	// Ask for confirmation before writing
-	if console.AskForConfirmation("Do you want to replace the file with the refactored code?") {
-		err = os.WriteFile(filePath, []byte(refactoredCode), 0644)
-		if err != nil {
-			color.Red.Printf("Error writing to file %s: %v\n", filePath, err)
-		} else {
-			color.Green.Println("File successfully refactored!")
 		}
 	}
 }
