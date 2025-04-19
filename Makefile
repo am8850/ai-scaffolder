@@ -1,10 +1,10 @@
 default:
 	@echo "Please specify a target. Available targets are:"
 
-build-linux:
+build:
 	go build .
 
-install: build-linux
+install: build
 	sudo cp aicoder /usr/local/bin/aicoder
 	sudo cp aicoder.json /usr/local/bin/aicoder.json
 	rm -rf aicoder
