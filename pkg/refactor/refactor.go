@@ -50,7 +50,12 @@ func Refactor(file, output string) {
 		return
 	}
 
-	reportResults(sanitizedResponse)
+	reportResults(&sanitizedResponse)
+
+	if sanitizedResponse.ImprovedCode == "" {
+		fmt.Println("No code was generated.")
+		return
+	}
 
 	if !console.AskForConfirmation("\nContinue to view the proposed code?") {
 		return
@@ -73,10 +78,9 @@ func Refactor(file, output string) {
 			}
 		}
 	}
-
 }
 
-func reportResults(sanitizedResponse config.SanitizerResponse) {
+func reportResults(sanitizedResponse *config.SanitizerResponse) {
 	fmt.Printf("\nCode information:\n\n")
 
 	fmt.Printf("Readability score: ")
