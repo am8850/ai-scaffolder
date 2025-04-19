@@ -74,9 +74,6 @@ func Refactor(file, output string) {
 		return
 	}
 
-	// fmt.Printf("\n\nOriginal code:\n\n")
-	// color.Cyan.Println(string(prompt))
-
 	fmt.Printf("\nProposed code changes:\n\n")
 	color.Green.Println(sanitizedResponse.ImprovedCode)
 
