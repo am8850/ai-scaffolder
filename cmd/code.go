@@ -10,8 +10,8 @@ import (
 var codeCmd = &cobra.Command{
 	Use:     "code",
 	Aliases: []string{"co"},
-	Short:   "Generate code using AI",
-	Long:    `Generate code scaffolding based on a provided prompt using AI`,
+	Short:   "Generate code from a prompt",
+	Long:    `Scaffold new code from a prompt using AI`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if prompt == "" {
 			fmt.Println("Error: --prompt or -p flag is required")
