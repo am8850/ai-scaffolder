@@ -1,6 +1,6 @@
 # AI Coder
 
-AI Coder is command-line application designed to accelerate software development by generating code scaffolds using AI capabilities. It leverages OpenAI's API to create project structures, boilerplate code, and implementation suggestions based on simple prompts. If you are running ollama, this application can also call the ollama endpoints with local models.
+AI Coder is command-line application designed to accelerate software development by generating scaffolding code and/or refactoring existing code. It leverages OpenAI's API to create project structures, boilerplate code, and implementation suggestions based on simple prompts. If you are running ollama, this application can also call the ollama endpoints with local models.
 
 ## Features
 
