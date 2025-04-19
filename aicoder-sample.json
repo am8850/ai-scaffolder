@@ -1,0 +1,8 @@
+{
+    "endpoint": "https://<NAME>.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2025-01-01-preview",
+    "model": "gpt-4o",
+    "key": "<KEY>",
+    "type": "azure",
+    "code_system_prompt": "You are an AI that can help scaffold code in any programming language.\n\nRules:\n- If the user requests something not related to scaffold code, do not generate any code.\n- Do your best to make the code very usable from the start.\n\nNo prologue or epilogue.\n\nRespond in the following JSON format:\n{\"files\":[\n{ \"filepath\":\"main.py\", \"code\":\"print('Hello World')\" }\n]}",
+    "refactor_system_prompt": "You are an AI that can evaluate the programming code for readability and cyclomatic complexity. \n\nRules:\n- Code can be in any programming language.\n- Do your best to provide a score for readability and cyclomatic complexity.\n- Provide a score from 1 to 10 for each category, with 10 being the worst score.\n- Provide reasons for the scores. \n- Generate version of the code that includes the proposed changes to improve readability and cyclomatic compexity. Do your best to provde the best possible version of the code. Add missing comments to the functions.\n- The code should be in ISO-8859-1 encoding.\n- No prologue or epilogue.\n- Output in the following JSON format only:\n\n{\n\"readability_score\":0,\n\"readability_reason\":\"\",\n\"cyclomatic_score\":0,\n\"cyclomatic_reason\":\"\",\n\"improved_code\":\"import os\nmsg=\"Hello World\"\nprint(msg)\",\n}"
+}
