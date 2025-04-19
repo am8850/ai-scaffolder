@@ -50,25 +50,7 @@ func Refactor(file, output string) {
 		return
 	}
 
-	fmt.Printf("\nCode information:\n\n")
-
-	fmt.Printf("Readability score: ")
-	if sanitizedResponse.ReadabilityScore < 5 {
-		color.Red.Println(sanitizedResponse.ReadabilityScore)
-	} else {
-		color.Cyan.Println(sanitizedResponse.ReadabilityScore)
-	}
-	fmt.Printf("Readability score reason:\n")
-	color.Cyan.Println(sanitizedResponse.ReadabilityReason)
-
-	fmt.Printf("\nCyclomatic complexity score: ")
-	if sanitizedResponse.CyclomaticScore > 5 {
-		color.Red.Println(sanitizedResponse.CyclomaticScore)
-	} else {
-		color.Cyan.Println(sanitizedResponse.CyclomaticScore)
-	}
-	fmt.Printf("Cyclomatic complexity score reason:\n")
-	color.Cyan.Println(sanitizedResponse.CyclomaticReason)
+	reportResults(sanitizedResponse)
 
 	if !console.AskForConfirmation("\nContinue to view the proposed code?") {
 		return
@@ -92,4 +74,26 @@ func Refactor(file, output string) {
 		}
 	}
 
+}
+
+func reportResults(sanitizedResponse config.SanitizerResponse) {
+	fmt.Printf("\nCode information:\n\n")
+
+	fmt.Printf("Readability score: ")
+	if sanitizedResponse.ReadabilityScore < 5 {
+		color.Red.Println(sanitizedResponse.ReadabilityScore)
+	} else {
+		color.Cyan.Println(sanitizedResponse.ReadabilityScore)
+	}
+	fmt.Printf("Readability score reason:\n")
+	color.Cyan.Println(sanitizedResponse.ReadabilityReason)
+
+	fmt.Printf("\nCyclomatic complexity score: ")
+	if sanitizedResponse.CyclomaticScore > 5 {
+		color.Red.Println(sanitizedResponse.CyclomaticScore)
+	} else {
+		color.Cyan.Println(sanitizedResponse.CyclomaticScore)
+	}
+	fmt.Printf("Cyclomatic complexity score reason:\n")
+	color.Cyan.Println(sanitizedResponse.CyclomaticReason)
 }
