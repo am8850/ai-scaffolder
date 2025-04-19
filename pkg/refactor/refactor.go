@@ -89,7 +89,7 @@ func Refactor(file, output string) {
 			fileParts := strings.Split(file, ".")
 			if len(fileParts) >= 2 && fileParts[0] != "" && fileParts[1] != "" {
 				file = fileParts[0] + "_sanitized." + fileParts[1]
-				fmt.Println(file)
+				fmt.Println("Creating file:", file)
 				err = os.WriteFile(file, []byte(sanitizedResponse.ImprovedCode), 0644)
 			}
 		}
